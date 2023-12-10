@@ -8,14 +8,9 @@ public class CurrencyPair {
     LocalDateTime dateOfExchange;
 
 
+    public double calculateExhangedValue(double belopp, double exchangedCurrencyRate) {
 
-
-    public double calculateExchangeRate(double firstd, double secondd) {
-
-        double together = firstd + secondd;
-
-        return together;
-
+        return belopp * exchangedCurrencyRate;
     }
 
 
