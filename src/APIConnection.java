@@ -1,6 +1,4 @@
-package API;
-
-public interface APIConnection {
+/*public interface APIConnection {
 
 
     private <T> dataFromAPI;
@@ -21,4 +19,4 @@ public interface APIConnection {
         }
     }
 }
-
+*/

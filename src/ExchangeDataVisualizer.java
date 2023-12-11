@@ -1,4 +1,4 @@
-public class ExchangeDataVisualizer implements Subscriber{
+/*public class ExchangeDataVisualizer implements Subscriber{
 
     private dataFromAPI;
 
@@ -9,3 +9,5 @@ public class ExchangeDataVisualizer implements Subscriber{
         repaint();
     }
 }
+
+ */
