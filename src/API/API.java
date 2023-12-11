@@ -1,3 +1,5 @@
+package API;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -9,7 +11,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class API {
+public class API implements APIConnection{
     private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/";
 
@@ -62,27 +64,7 @@ public class API {
 
 
 
-/*
 
-APIConnection{
-    private <T> dataFromAPI;
-    Private List <Subscriber> listOfObservers = new ArrayList<>();
-
-    Public void addObserver(Subscriber subscriber){
-        this.listOfObservers.add(subscriber);
-    }
-
-    public void removeObserver(Subscriber subscriber){
-        this.listOfObservers.remove(subscriber);
-    }
-
-    public void notify(<T> dataFromAPI){
-        this.dataFromAPI = dataFromAPI;
-        for(Subscriber subscriber : listOfObservers){
-            subscriber.update(this.dataFromAPI);
-        }
-    }
-}
 
 
 
