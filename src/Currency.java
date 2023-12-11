@@ -3,7 +3,8 @@ public enum Currency {
     USD,
     GBP,
     EUR,
-    SEK
+    SEK,
+    NOK,
 
 
 }
