@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Gui {
     //Huvudpanel
@@ -29,5 +30,22 @@ public class Gui {
     JLabel actualCurrencyUsd = new JLabel(); //Label för att pressentera nuvarande kurs i usd till sek
 
     JLabel sourceOfData = new JLabel("Data extracted from"); //Label för att pressentera källan av datan
+
+    //Metod för att rita ut fönstret
+    public void drawXchangePanel(){
+        setLayout(new BorderLayout());
+        add(headPanel);
+        add(topPanel, BorderLayout.NORTH);
+        add(centerPanel,BorderLayout.CENTER);
+        add(bottomPanel,BorderLayout.SOUTH);
+
+        //Style
+        xChangerName.setFont(new Font("Arial",Font.BOLD,40)); //Ändra stil på titeln
+
+        headPanel.setLayout(new BorderLayout());
+        topPanel.add(xChangerName); //Lägger till titeln till toppanel
+
+        centerPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
 }
