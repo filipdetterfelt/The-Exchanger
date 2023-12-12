@@ -4,39 +4,67 @@ import java.net.URL;
 import java.io.InputStreamReader;
 import java.io.InputStream;
 import java.io.BufferedReader;
-
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class API {
+import java.util.HashMap;
+import java.util.Map;
+
+public class API /*implements APIConnection*/{
     private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/";
 
-    public double getConvertedValue(Enum<Currency> baseCurrency, Enum<Currency> targetCurrencyEnum, double amount) {
-        double result = 0;
+    //inner class
+    public class ExchangeInfo {
+        private double exchangedAmount;
+        private double rate;
+        private String date;
+
+        ExchangeInfo(double exchangedAmount, double rate, String date) {
+            this.exchangedAmount = exchangedAmount;
+            this.rate = rate;
+            this.date = date;
+        }
+
+        public double getExchangedAmount() {
+            return exchangedAmount;
+        }
+
+        public double getRate() {
+            return rate;
+        }
+
+        public String getDate() {
+            return date;
+        }
+    }
+
+    public Map<String, ExchangeInfo> setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
+        double exhangedAmount = 0;
+        Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
         try {
             String targetCurrency = targetCurrencyEnum.toString();
-            // Skapa URL-objekt
             URL url = new URL(API_URL + baseCurrency);
 
-            // Öppna anslutning
             HttpURLConnection request = (HttpURLConnection) url.openConnection();
             request.setRequestMethod("GET");
             request.connect();
 
             JsonObject jsonobj = getJsonObject(request);
 
-            // Hämta växelkursen
             JsonObject rates = jsonobj.getAsJsonObject("conversion_rates");
             double rate = rates.get(targetCurrency).getAsDouble();
 
-            result = rate * amount;
+            double exchangedAmount = rate * amount;
+
+            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, jsonobj.get("time_last_update_unix").getAsString());
+            exchangeInfoMap.put(targetCurrency, info);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return exchangeInfoMap;
     }
 
     private static JsonObject getJsonObject(HttpURLConnection request) throws IOException {
@@ -58,4 +86,24 @@ public class API {
         JsonObject jsonobj = root.getAsJsonObject();
         return jsonobj;
     }
+
+    public void printExchangeInfo(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
+        Map<String, API.ExchangeInfo> exchangeInfoMap = setApiExchangeInput(baseCurrency, targetCurrencyEnum, amount);
+        String targetCurrency = targetCurrencyEnum.toString();
+
+        API.ExchangeInfo info = exchangeInfoMap.get(targetCurrency);
+
+        if (info != null) {
+            double exchangedAmount = info.getExchangedAmount();
+            double rate = info.getRate();
+            String dateOfExchange = info.getDate();
+
+            System.out.println("Exchanged Amount: " + exchangedAmount);
+            System.out.println("Rate: " + rate);
+            System.out.println("Date of Exchange: " + dateOfExchange);
+        } else {
+            System.out.println("No exchange information available for the specified currency.");
+        }
+    }
+
 }

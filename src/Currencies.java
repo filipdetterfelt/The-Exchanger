@@ -1,4 +1,5 @@
-public enum Currency {
+
+public enum Currencies {
 
     USD,
     GBP,
