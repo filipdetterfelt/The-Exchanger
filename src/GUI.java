@@ -3,6 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
+
+    JButton convertButton = new JButton("Convert"); //Knapp för att konvertera valutan
+
+
     public GUI(PresentationView view) {
 
         //Huvudpanel
@@ -28,7 +32,6 @@ public class GUI extends JFrame {
 
         JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
 
-        JButton convertButton = new JButton("Convert"); //Knapp för att konvertera valutan
 
 
         JLabel actualCurrencySek = new JLabel("1 SEK = 0.0953 US Dollars"); //Label för att pressentera nuvarande kurs i sek till usd

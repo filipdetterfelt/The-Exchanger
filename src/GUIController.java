@@ -2,16 +2,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUIController implements ActionListener {
-GUIController(){
-    API api = new API();
+
     PresentationView view = new PresentationView();
     GUI gui = new GUI(view);
 
+
+
+
+GUIController(){
+    API api = new API();
+   // PresentationView view = new PresentationView();
+
     gui.getConvertButton().addActionListener(this);
+
 }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == gui.getConvertButton()) {
+        System.out.println("hey");
+    }
+
+
         }
     }
     //Actionlistener
