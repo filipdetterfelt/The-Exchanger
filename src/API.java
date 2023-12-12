@@ -40,9 +40,8 @@ public class API /*implements APIConnection*/{
         }
     }
 
-    public Map<String, ExchangeInfo> setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
+    public void setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
         double exhangedAmount = 0;
-        Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
         try {
             String targetCurrency = targetCurrencyEnum.toString();
             URL url = new URL(API_URL + baseCurrency);
@@ -59,11 +58,17 @@ public class API /*implements APIConnection*/{
             double exchangedAmount = rate * amount;
 
             ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, jsonobj.get("time_last_update_unix").getAsString());
-            exchangeInfoMap.put(targetCurrency, info);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<String, ExchangeInfo> currencyExtractedInfoMap() {
+
+        Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
+        exchangeInfoMap.put(targetCurrency, info);
+
         return exchangeInfoMap;
     }
 
