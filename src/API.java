@@ -21,7 +21,7 @@ public class API /*implements APIConnection*/{
         private double rate;
         private String date;
 
-        ExchangeInfo(double exchangedAmount, double rate, String date) {
+        ExchangeInfo(double exchangedAmount, double rate, String date) {                       //omvandlad valuta mängd, kurs och datum det hände
             this.exchangedAmount = exchangedAmount;
             this.rate = rate;
             this.date = date;
@@ -45,26 +45,26 @@ public class API /*implements APIConnection*/{
         Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
         try {
             String targetCurrency = targetCurrencyEnum.toString();
-            URL url = new URL(API_URL + baseCurrency);
+            URL url = new URL(API_URL + baseCurrency);                                   //gör URL beroende på basecurrency, om det är URL till USD eller SEK t.ex.
 
-            HttpURLConnection request = (HttpURLConnection) url.openConnection();
-            request.setRequestMethod("GET");
-            request.connect();
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();                 //öppnar connection, castar till httpURLconnection
+            request.setRequestMethod("GET");                                                            //hämtar exchange data
+            request.connect();                                                                          //till specific URL
 
-            JsonObject jsonobj = getJsonObject(request);
+            JsonObject jsonobj = getJsonObject(request);                                             //sparar som JsonObject, kallar på metoden getJsonObject med request som parameter
 
-            JsonObject rates = jsonobj.getAsJsonObject("conversion_rates");
-            double rate = rates.get(targetCurrency).getAsDouble();
+            JsonObject rates = jsonobj.getAsJsonObject("conversion_rates");          //parsar rates till ett Jsonobjekt?
+            double rate = rates.get(targetCurrency).getAsDouble();                              //rate är här "exchangerate", får targetcurrency som en double
 
-            double exchangedAmount = rate * amount;
+            double exchangedAmount = rate * amount;                                                //mängden vi får efter exchangen har hänt, är exchangedamount
 
-            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, jsonobj.get("time_last_update_unix").getAsString());
-            exchangeInfoMap.put(targetCurrency, info);
+            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, jsonobj.get("time_last_update_unix").getAsString());   //skickar in mängd, kurs och datum det hände
+            exchangeInfoMap.put(targetCurrency, info);                                                        //här läggs currency vi konvererar till, och ovanstående info in i hasmappen
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return exchangeInfoMap;
+        return exchangeInfoMap;        //metoden returnar mappen
     }
 
     private static JsonObject getJsonObject(HttpURLConnection request) throws IOException {
@@ -88,15 +88,15 @@ public class API /*implements APIConnection*/{
     }
 
     public void printExchangeInfo(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
-        Map<String, API.ExchangeInfo> exchangeInfoMap = setApiExchangeInput(baseCurrency, targetCurrencyEnum, amount);
+        Map<String, API.ExchangeInfo> exchangeInfoMap = setApiExchangeInput(baseCurrency, targetCurrencyEnum, amount);   //skapar hashmap, skickar in input vi vill ändra. Får ut valuta vi vill konvertera till, mängden vi konverterar till, kursen och datum.
         String targetCurrency = targetCurrencyEnum.toString();
 
-        API.ExchangeInfo info = exchangeInfoMap.get(targetCurrency);
+        API.ExchangeInfo info = exchangeInfoMap.get(targetCurrency);          //vår valuta vi vill konvertera till får vi ut, är info
 
         if (info != null) {
-            double exchangedAmount = info.getExchangedAmount();
-            double rate = info.getRate();
-            String dateOfExchange = info.getDate();
+            double exchangedAmount = info.getExchangedAmount();                 //får mängd
+            double rate = info.getRate();                                       //får kurs
+            String dateOfExchange = info.getDate();                             //datum det hände
 
             System.out.println("Exchanged Amount: " + exchangedAmount);
             System.out.println("Rate: " + rate);
