@@ -15,31 +15,6 @@ public class API /*implements APIConnection*/{
     private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/";
 
-    //inner class
-    public class ExchangeInfo {
-        private double exchangedAmount;
-        private double rate;
-        private String date;
-
-        ExchangeInfo(double exchangedAmount, double rate, String date) {
-            this.exchangedAmount = exchangedAmount;
-            this.rate = rate;
-            this.date = date;
-        }
-
-        public double getExchangedAmount() {
-            return exchangedAmount;
-        }
-
-        public double getRate() {
-            return rate;
-        }
-
-        public String getDate() {
-            return date;
-        }
-    }
-
     public void setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
         double exhangedAmount = 0;
         try {
@@ -57,17 +32,17 @@ public class API /*implements APIConnection*/{
 
             double exchangedAmount = rate * amount;
 
-            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, jsonobj.get("time_last_update_unix").getAsString());
+            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate,baseCurrency.toString(), targetCurrency, jsonobj.get("time_last_update_unix").getAsString());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public Map<String, ExchangeInfo> currencyExtractedInfoMap() {
+    public Map<String, ExchangeInfo> currencyExtractedInfoMap(ExchangeInfo info) {
 
         Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
-        exchangeInfoMap.put(targetCurrency, info);
+
+        exchangeInfoMap.put(info.getTargetCurrency(), info);
 
         return exchangeInfoMap;
     }
@@ -90,25 +65,6 @@ public class API /*implements APIConnection*/{
         JsonElement root = parser.parse(response.toString());
         JsonObject jsonobj = root.getAsJsonObject();
         return jsonobj;
-    }
-
-    public void printExchangeInfo(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
-        Map<String, API.ExchangeInfo> exchangeInfoMap = setApiExchangeInput(baseCurrency, targetCurrencyEnum, amount);
-        String targetCurrency = targetCurrencyEnum.toString();
-
-        API.ExchangeInfo info = exchangeInfoMap.get(targetCurrency);
-
-        if (info != null) {
-            double exchangedAmount = info.getExchangedAmount();
-            double rate = info.getRate();
-            String dateOfExchange = info.getDate();
-
-            System.out.println("Exchanged Amount: " + exchangedAmount);
-            System.out.println("Rate: " + rate);
-            System.out.println("Date of Exchange: " + dateOfExchange);
-        } else {
-            System.out.println("No exchange information available for the specified currency.");
-        }
     }
 
 }

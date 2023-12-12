@@ -1,22 +1,19 @@
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUIController implements ActionListener {
-
-    private PresentationView presentationView;
-    private Gui gui = new Gui(presentationView);
-
+GUIController(){
     API api = new API();
-    //PresentationView view = new PresentationView();
+    PresentationView view = new PresentationView();
+    GUI gui = new GUI(view);
 
+    gui.getConvertButton().addActionListener(this);
+}
 
-    public GUIController(PresentationView presentationView) {
-        this.presentationView = presentationView;
-        // Register the Controller as the listener for GUI events
-        this.addButtonActionListener(this);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        }
     }
-
     //Actionlistener
 /*
     ActionListener (Convert){
@@ -29,13 +26,5 @@ public class GUIController implements ActionListener {
         view.setAmountTo(e);
     }
     */
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == gui.) {
-            api.setApiExchangeInput(presentationView.getCurrencyFrom(), presentationView.getCurrencyTo(), presentationView.getAmountFrom());
-        }
-    }
-}
 
 

@@ -2,12 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Gui extends JFrame{
-
-    private PresentationView presentationView;
-
-    public Gui(PresentationView presentationView) {
-        this.presentationView = presentationView;
+public class GUI extends JFrame {
+    public GUI(PresentationView view) {
 
         //Huvudpanel
         JPanel headPanel = new JPanel();
@@ -33,9 +29,7 @@ public class Gui extends JFrame{
         JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
 
         JButton convertButton = new JButton("Convert"); //Knapp för att konvertera valutan
-        public void addButtonActionListener (ActionListener listener){
-            convertButton.addActionListener(listener);
-        }
+
 
         JLabel actualCurrencySek = new JLabel("1 SEK = 0.0953 US Dollars"); //Label för att pressentera nuvarande kurs i sek till usd
         JLabel actualCurrencyUsd = new JLabel(); //Label för att pressentera nuvarande kurs i usd till sek
@@ -143,6 +137,10 @@ public class Gui extends JFrame{
             setResizable(false);
 
         }
+    public JButton getConvertButton() {
+        return convertButton;
+    }
+
     }
 
     /*public static void main(String[] args) {
