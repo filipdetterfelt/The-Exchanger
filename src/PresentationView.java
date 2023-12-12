@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PresentationView {
 
     private double amountTo;
@@ -12,6 +16,7 @@ public class PresentationView {
     }
 
     public void setAmountTo(double amountTo) {
+        System.out.println(amountTo);
         this.amountTo = amountTo;
     }
 
@@ -64,6 +69,8 @@ public class PresentationView {
     }
 
     String apiSource;
+
+    Currencies currency;
 }
 
 

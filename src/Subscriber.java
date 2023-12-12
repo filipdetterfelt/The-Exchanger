@@ -1,3 +1,3 @@
 public interface Subscriber {
-    public void update(Object o);
+    public void update(ExchangeInfo o);
 }

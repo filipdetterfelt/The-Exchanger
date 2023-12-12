@@ -1,16 +1,20 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIController implements ActionListener {
+public class GUIController implements ActionListener , Subscriber {
 
-    PresentationView view = new PresentationView();
-    GUI gui = new GUI(view);
+    GUI gui;
+    API api;
+    PresentationView view;
 
 
 
+GUIController(API api, GUI gui, PresentationView view){
+    this.api = api;
+    this.gui = gui;
+    this.view = view;
 
-GUIController(){
-    API api = new API();
+
    //PresentationView view = new PresentationView();
 
     gui.getConvertButton().addActionListener(this);
@@ -20,12 +24,20 @@ GUIController(){
     @Override
     public void actionPerformed(ActionEvent e) {
     if (e.getSource() == gui.getConvertButton()) {
-        System.out.println("hey");
+        api.setApiExchangeInput(Currencies.SEK, Currencies.NOK, 200);
     }
 
 
         }
+
+
+    @Override
+    public void update(ExchangeInfo info) {
+
+        view.setAmountTo(info.getExchangedAmount());
+        //gui.xChangerName.setText(String.valueOf(info.getExchangedAmount()));
     }
+}
     //Actionlistener
 /*
     ActionListener (Convert){

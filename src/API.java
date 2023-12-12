@@ -8,13 +8,16 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class API /*implements APIConnection*/{
+public class API implements Observed{
     private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/";
+    private ExchangeInfo info;
 
+    private ArrayList<Subscriber> listOfObservers = new ArrayList<>();
     public void setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
         double exhangedAmount = 0;
         try {
@@ -32,20 +35,22 @@ public class API /*implements APIConnection*/{
 
             double exchangedAmount = rate * amount;
 
-            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate,baseCurrency.toString(), targetCurrency, jsonobj.get("time_last_update_unix").getAsString());
+            info = new ExchangeInfo(exchangedAmount, rate,baseCurrency.toString(), targetCurrency, jsonobj.get("time_last_update_unix").getAsString());
+            notifySubscriber(info);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public Map<String, ExchangeInfo> currencyExtractedInfoMap(ExchangeInfo info) {
+    /*public Map<String, ExchangeInfo> currencyExtractedInfoMap(ExchangeInfo info) {
 
         Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
 
         exchangeInfoMap.put(info.getTargetCurrency(), info);
 
+
         return exchangeInfoMap;
-    }
+    }*/
 
     private static JsonObject getJsonObject(HttpURLConnection request) throws IOException {
         InputStream inputStream = request.getInputStream();
@@ -67,4 +72,21 @@ public class API /*implements APIConnection*/{
         return jsonobj;
     }
 
+
+    @Override
+    public void addSubscriber(Subscriber subscriber) {
+        this.listOfObservers.add(subscriber);
+    }
+
+    @Override
+    public void removeSubscriber(Subscriber subscriber) {
+        this.listOfObservers.remove(subscriber);
+    }
+
+    @Override
+    public void notifySubscriber(ExchangeInfo info) {
+        for (Subscriber subscriber : listOfObservers) {
+            subscriber.update(info);
+        }
+    }
 }
