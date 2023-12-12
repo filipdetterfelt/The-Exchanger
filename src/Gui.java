@@ -16,7 +16,7 @@ public class Gui extends JFrame{
     JComboBox<String> frånValutaComboBox = new JComboBox<>(); // COmbobox för från valuta
     JTextField frånText = new JTextField(); //Textfield för att kunna skriva in belopp
 
-    JLabel tillLabel = new JLabel("Till"); //Label där det står till
+    JLabel tillLabel = new JLabel("Till:"); //Label där det står till
     JLabel tillValuta = new JLabel(); //Label där de pressenteras vilken valuta från (lägg in värde)
     JComboBox<String> tillValutaComboBox = new JComboBox<>(); // COmbobox för till valuta
 
