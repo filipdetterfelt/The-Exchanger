@@ -94,7 +94,16 @@ public class Gui extends JFrame{
         gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(convertButton, gbc);
 
-
+        ImageIcon originalJulgranIcon = new ImageIcon("C:\\Users\\filli\\IdeaProjects\\JframeTesting" +
+                "\\src\\png-clipart-christmas-tree-christmas-tree-holidays-decor - kopia.png");
+        Image originialImage = originalJulgranIcon.getImage();
+        //Ändra storlek för bilden
+        int imagewidth = 150;
+        int imageHeigth = 200;
+        Image scaledJulgran = originialImage.getScaledInstance(imagewidth, imageHeigth,Image.SCALE_SMOOTH);
+        ImageIcon nyaJulgran = new ImageIcon(scaledJulgran);
+        JLabel julgranLabel = new JLabel(nyaJulgran);
+        topPanel.add(julgranLabel);
 
         //Bottompanel
         gbc.insets = new Insets(5,5,5,5);
