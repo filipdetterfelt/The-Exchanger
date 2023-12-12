@@ -84,8 +84,8 @@ public class Gui extends JFrame{
 
 
         //Ändra storlek på convert knappen
-        int convertwidth = 200;
-        int convertheigth = 40;
+         int convertwidth = 200;
+         int convertheigth = 40;
         Dimension newDimensionConvertButton = new Dimension(convertwidth, convertheigth);
         convertButton.setPreferredSize(newDimensionConvertButton);
 
@@ -94,12 +94,11 @@ public class Gui extends JFrame{
         gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(convertButton, gbc);
 
-        ImageIcon originalJulgranIcon = new ImageIcon("C:\\Users\\filli\\IdeaProjects\\JframeTesting" +
-                "\\src\\png-clipart-christmas-tree-christmas-tree-holidays-decor - kopia.png");
+        ImageIcon originalJulgranIcon = new ImageIcon("Images/gran.png");
         Image originialImage = originalJulgranIcon.getImage();
         //Ändra storlek för bilden
-        int imagewidth = 150;
-        int imageHeigth = 200;
+        int imagewidth = 500;
+        int imageHeigth = 250;
         Image scaledJulgran = originialImage.getScaledInstance(imagewidth, imageHeigth,Image.SCALE_SMOOTH);
         ImageIcon nyaJulgran = new ImageIcon(scaledJulgran);
         JLabel julgranLabel = new JLabel(nyaJulgran);
@@ -132,7 +131,7 @@ public class Gui extends JFrame{
         //Lägg till bilden på granen här
         setTitle("The X:changer");
         setSize(400,650);
-        Color myColor = Color.decode("#6c25be");
+        Color myColor = Color.decode("#052543");
         topPanel.setBackground(myColor);
         centerPanel.setBackground(myColor);
         bottomPanel.setBackground(myColor);
