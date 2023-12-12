@@ -5,7 +5,7 @@ public class PresentationView {
     private double rate;
     private Enum<Currencies> currencyTo;
     private Enum<Currencies> currencyFrom;
-    private String date;
+    private String date = "hhhh";
 
     public double getAmountTo() {
         return amountTo;
@@ -52,7 +52,7 @@ public class PresentationView {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = "date";
     }
 
     public String getApiSource() {

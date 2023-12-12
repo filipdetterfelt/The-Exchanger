@@ -4,10 +4,19 @@ import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
 
-    JButton convertButton = new JButton("Convert"); //Knapp för att konvertera valutan
+    JButton convertButton; //new JButton("Convert"); //Knapp för att konvertera valutan
+
+
+    PresentationView view;
 
 
     public GUI(PresentationView view) {
+
+        this.view = view;
+
+        convertButton = new JButton(view.getDate());
+
+
 
         //Huvudpanel
         JPanel headPanel = new JPanel();
