@@ -9,9 +9,5 @@ public class Main {
         GUIController guiController = new GUIController(api, gui);
 
         api.addSubscriber(guiController);
-        api.addSubscriber(gui);
-
-
     }
 }
-

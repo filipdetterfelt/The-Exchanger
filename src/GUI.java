@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GUI extends JFrame implements Subscriber {
+public class GUI extends JFrame {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
     Color myColor = Color.decode("#6c25be");
@@ -168,14 +168,6 @@ public class GUI extends JFrame implements Subscriber {
 
     public void updateExchangedDate(String date){
         dateOfExchange.setText(date);
-    }
-
-    @Override
-    public void update(ExchangeInfo o) {
-        xChangerName.setText(String.valueOf(o.getRate()));
-        System.out.println("inne i update");
-        revalidate();
-        repaint();
     }
 }
 
