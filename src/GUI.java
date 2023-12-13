@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GUI extends JFrame implements Subscriber {
+public class GUI extends JFrame {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
     Color myColor = Color.decode("#6c25be");
@@ -140,7 +140,6 @@ public class GUI extends JFrame implements Subscriber {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //setResizable(false);
-
     }
 
     public JButton getConvertButton() {
@@ -157,22 +156,25 @@ public class GUI extends JFrame implements Subscriber {
     public void updateExchangedAmount(double amount){
         tillValuta.setText(String.valueOf(amount));
     }
-
+    // frånValutaComboBox.getSelectedItem().;
     public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
+
+        Currencies fromCurrencyEnum= (Currencies) fromCurrency;
+        String fromCurrencyString = fromCurrencyEnum.fullName;
+
+        Currencies toCurrencyEnum = (Currencies) toCurrency;
+        String toCurrencyString = toCurrencyEnum.fullName;
+
+        String rateAsString = String.valueOf(rate);
+        String reversedRateAsString = String.valueOf(reversedRate);
+
+        rateInformation.setText(fromCurrencyString + toCurrencyString + rateAsString + reversedRateAsString);
+
         //rateInformation = "HTML kod här"
     }
 
     public void updateExchangedDate(String date){
         dateOfExchange.setText(date);
-    }
-
-
-    @Override
-    public void update(ExchangeInfo o) {
-        xChangerName.setText(String.valueOf(o.getRate()));
-        System.out.println("inne i update");
-        revalidate();
-        repaint();
     }
 }
 

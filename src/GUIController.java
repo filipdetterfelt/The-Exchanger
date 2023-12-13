@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIController implements ActionListener , Subscriber {
+public class GUIController implements ActionListener, Subscriber {
 
     GUI gui;
     API api;
@@ -10,9 +10,11 @@ public class GUIController implements ActionListener , Subscriber {
     Currencies frånValutaComboBox;
     Currencies tillValutaComboBox;
 
-GUIController(API api, GUI gui){
-    this.api = api;
-    this.gui = gui;
+    String originalAmount= "text";          //Måste finnas bokstäver här pga null-värde
+
+    GUIController(API api, GUI gui) {
+        this.api = api;
+        this.gui = gui;
 
     gui.getConvertButton().addActionListener(this);
     gui.getFrånValutaComboBox().addActionListener(this);
@@ -21,9 +23,10 @@ GUIController(API api, GUI gui){
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == gui.getConvertButton()) {
-        api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
-    }
+        if (e.getSource() == gui.getConvertButton()) {
+            if(isValidInput(originalAmount)) {
+                api.setApiExchangeInput(Currencies.SEK, Currencies.NOK, 200);
+            }
     if (e.getSource() == gui.getFrånValutaComboBox()) {
         JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
         frånValutaComboBox = (Currencies)comboBox.getSelectedItem();
@@ -32,15 +35,23 @@ GUIController(API api, GUI gui){
         JComboBox<Currencies> comboBox = gui.getTillValutaComboBox();
         tillValutaComboBox = (Currencies)comboBox.getSelectedItem();
     }}
+    }
+
     @Override
     public void update(ExchangeInfo info) {
         gui.updateExchangedAmount(info.getExchangedAmount());
-        gui.updateRateInformation(info.getBaseCurrency(),info.getTargetCurrency(), info.getRate(), info.getReverseRate());
+        gui.updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());
 
     }
+
+    public boolean isValidInput(String amount) {
+        return amount.matches("[0-9]+");
+    }
 }
-    //Actionlistener
+
+
+//Actionlistener
 /*
     ActionListener (Convert){
         api.setApiExchangeInput(view.getCurrencyFrom(), view.getCurrencyTo(), view.getAmountFrom());
