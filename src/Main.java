@@ -4,10 +4,9 @@
 public class Main {
     public static void main(String[] args) {
 
-        PresentationView view = new PresentationView();
         API api = new API();
-        GUI gui = new GUI(view);
-        GUIController guiController = new GUIController(api, gui, view);
+        GUI gui = new GUI();
+        GUIController guiController = new GUIController(api, gui);
 
         api.addSubscriber(guiController);
         api.addSubscriber(gui);

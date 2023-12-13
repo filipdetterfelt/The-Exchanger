@@ -29,8 +29,9 @@ public class API implements Observed {
             String timeLastUpdateUtc = jsonObj.get("time_last_update_utc").toString();
             String result = jsonObj.get("result").toString(); //Berättar om det gick att omvandla
 
-            if(result.equalsIgnoreCase("success")) {
-                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum.toString(), targetCurrency, timeLastUpdateUtc);
+            if(result.equalsIgnoreCase("\"success\"")) {
+                System.out.println("inne i success");
+                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
                 notifySubscriber(info);
             } else if (result.equalsIgnoreCase("quota-reached")) {
                 System.out.println("account has reached the the number of requests allowed by your plan");
