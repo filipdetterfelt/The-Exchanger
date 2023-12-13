@@ -10,26 +10,31 @@ import java.util.ArrayList;
 
 public class API implements Observed {
     private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
-    private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/";
+    private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
     private final ArrayList<Subscriber> listOfObservers = new ArrayList<>();
 
-    public void setApiExchangeInput(Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrencyEnum, double amount) {
+    public void setApiExchangeInput(Enum<Currencies> baseCurrencyEnum, Enum<Currencies> targetCurrencyEnum, double conversionAmount) {
 
         try {
             String targetCurrency = targetCurrencyEnum.toString();
-            URL url = new URL(API_URL + baseCurrency);
+            URL url = new URL(API_URL + baseCurrencyEnum + "/" + targetCurrency + "/" + conversionAmount);
 
             HttpURLConnection request = (HttpURLConnection) url.openConnection();
             request.setRequestMethod("GET");
             request.connect();
 
             JsonObject jsonObj = getJsonObject(request);
-            JsonObject rates = jsonObj.getAsJsonObject("conversion_rates");
-            double rate = rates.get(targetCurrency).getAsDouble();
-            double exchangedAmount = rate * amount;
+            double conversionResult = jsonObj.get("conversion_result").getAsDouble();
+            double conversionRate = jsonObj.get("conversion_rate").getAsDouble();
+            String timeLastUpdateUtc = jsonObj.get("time_last_update_utc").toString();
+            String result = jsonObj.get("result").toString(); //Berättar om det gick att omvandla
 
-            ExchangeInfo info = new ExchangeInfo(exchangedAmount, rate, baseCurrency.toString(), targetCurrency, jsonObj.get("time_last_update_unix").getAsString());
-            notifySubscriber(info);
+            if(result.equalsIgnoreCase("success")) {
+                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum.toString(), targetCurrency, timeLastUpdateUtc);
+                notifySubscriber(info);
+            } else if (result.equalsIgnoreCase("quota-reached")) {
+                System.out.println("account has reached the the number of requests allowed by your plan");
+            }
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
