@@ -25,7 +25,7 @@ public class GUI extends JFrame implements Subscriber{
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
 
-    JTextField tillText = new JTextField(); //Textfield för att kunna skriva ut det nya beloppet
+    JTextField tillText = new JTextField("hey"); //Textfield för att kunna skriva ut det nya beloppet
 
     JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
 
@@ -59,7 +59,9 @@ public class GUI extends JFrame implements Subscriber{
             headPanel.setLayout(new BorderLayout());
             topPanel.add(xChangerName); //Lägger till titeln till toppanel
 
-            centerPanel.setLayout(new GridBagLayout());
+            //centerPanel.setLayout(new FlowLayout());
+
+
             GridBagConstraints gbc = new GridBagConstraints();
 
             gbc.insets = new Insets(2, 5, 5, 5); //Marginal mellan komponenter
@@ -86,14 +88,18 @@ public class GUI extends JFrame implements Subscriber{
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.LINE_END;
             centerPanel.add(tillLabel, gbc);
+             //centerPanel.add(tillLabel, gbc);
+           //bottomPanel.add(tillLabel);
+
 
             gbc.gridx = 2;
             gbc.gridy = 1;
             gbc.anchor = GridBagConstraints.LINE_END;
             centerPanel.add(tillValutaComboBox, gbc);
             gbc.gridx = 3; //Flyttar gridx med 1 så att den hamnar till höger om combobox
-            tillText.setColumns(5); //Ändrar bredden på textfield
+              tillText.setColumns(5); //Ändrar bredden på textfield
             centerPanel.add(tillText, gbc);
+            //tillText.setPreferredSize(new Dimension(200,300));
 
 
             //Ändra storlek på convert knappen

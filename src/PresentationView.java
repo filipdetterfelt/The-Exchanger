@@ -9,7 +9,7 @@ public class PresentationView {
     private double rate;
     private Enum<Currencies> currencyTo;
     private Enum<Currencies> currencyFrom;
-    private String date = "hhhh";
+    private String date = "hhhgghh";
 
     public double getAmountTo() {
         return amountTo;
