@@ -5,20 +5,12 @@ public class GUIController implements ActionListener , Subscriber {
 
     GUI gui;
     API api;
-    PresentationView view;
 
-
-
-GUIController(API api, GUI gui, PresentationView view){
+GUIController(API api, GUI gui){
     this.api = api;
     this.gui = gui;
-    this.view = view;
-
-
-   //PresentationView view = new PresentationView();
 
     gui.getConvertButton().addActionListener(this);
-
 }
 
     @Override
@@ -26,16 +18,14 @@ GUIController(API api, GUI gui, PresentationView view){
     if (e.getSource() == gui.getConvertButton()) {
         api.setApiExchangeInput(Currencies.SEK, Currencies.NOK, 200);
     }
-
-
         }
-
 
     @Override
     public void update(ExchangeInfo info) {
+        gui.updateExchangedAmount(info.getExchangedAmount());
+        gui.updateRateInformation(info.getBaseCurrency(),info.getTargetCurrency(), info.getRate(), info.getReverseRate());
+        gui.updateExchangedDate(info.getDate());
 
-        view.setAmountTo(info.getExchangedAmount());
-        //gui.xChangerName.setText(String.valueOf(info.getExchangedAmount()));
     }
 }
     //Actionlistener
