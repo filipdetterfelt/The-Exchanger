@@ -24,7 +24,7 @@ public class GUI extends JFrame implements Subscriber {
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
     JLabel rateInformation = new JLabel(); //Label för att presentera nuvarande kurs
-    JLabel sourceOfData = new JLabel("Data extracted from"); //Label för att pressentera källan av datan
+    JLabel sourceOfData = new JLabel("<html>extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
 
@@ -145,6 +145,13 @@ public class GUI extends JFrame implements Subscriber {
 
     public JButton getConvertButton() {
         return convertButton;
+    }
+
+    public JComboBox<Currencies> getFrånValutaComboBox() {
+        return frånValutaComboBox;
+    }
+    public JComboBox<Currencies> getTillValutaComboBox() {
+        return tillValutaComboBox;
     }
 
     public void updateExchangedAmount(double amount){

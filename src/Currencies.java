@@ -13,7 +13,4 @@ public enum Currencies {
          fullName = s;
      }
 
-
-
-
 }
