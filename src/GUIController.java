@@ -25,7 +25,7 @@ public class GUIController implements ActionListener, Subscriber {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == gui.getConvertButton()) {
             if(isValidInput(originalAmount)) {
-                api.setApiExchangeInput(Currencies.SEK, Currencies.NOK, 200);
+                api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, 200);
             }
     if (e.getSource() == gui.getFrånValutaComboBox()) {
         JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
