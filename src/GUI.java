@@ -77,6 +77,7 @@ public class GUI extends JFrame implements Subscriber{
             centerPanel.add(frånValutaComboBox, gbc);
             gbc.gridx = 1;
             frånText.setColumns(5);
+            gbc.gridwidth = 2;
             centerPanel.add(frånText, gbc);
 
 
@@ -154,7 +155,7 @@ public class GUI extends JFrame implements Subscriber{
 
     @Override
     public void update(ExchangeInfo o) {
-        xChangerName.setText(String.valueOf(view.getAmountTo()));
+        tillText.setText(String.valueOf(view.getAmountTo()));
         revalidate();
         repaint();
     }
