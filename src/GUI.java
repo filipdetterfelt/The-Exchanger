@@ -160,7 +160,6 @@ public class GUI extends JFrame implements Subscriber {
 
     public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
         //rateInformation = "HTML kod här"
-        rateInformation.setText(toCurrency);
     }
 
     public void updateExchangedDate(String date){
