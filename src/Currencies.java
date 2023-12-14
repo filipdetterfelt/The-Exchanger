@@ -5,7 +5,8 @@ public enum Currencies {
     GBP ("British Pounds"),
     EUR ("Euro"),
     SEK ("Svensk Krona"),
-    NOK ("Norsk Krona");
+    NOK ("Norsk Krona"),
+    DKK ("Dansk Krona");
 
     public final String fullName;
 

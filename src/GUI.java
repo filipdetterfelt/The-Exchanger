@@ -75,6 +75,9 @@ public class GUI extends JFrame {
         frånValuta.setColumns(5);
         centerPanel.add(frånValuta, gbc);
         frånValuta.setText("0");
+        //default values for dropbox
+        frånValutaComboBox.setSelectedItem(Currencies.SEK);
+        tillValutaComboBox.setSelectedItem(Currencies.USD);
 
 
         /*gbc.gridx = 1;
