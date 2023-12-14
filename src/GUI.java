@@ -1,10 +1,11 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class GUI extends JFrame implements Subscriber {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
-    Color myColor = Color.decode("#6c25be");
+    Color myColor = Color.decode("#052543");
     Color colorOfButton = Color.decode("#FFCF41");
 
 
@@ -18,15 +19,15 @@ public class GUI extends JFrame implements Subscriber {
     JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
-    JLabel xChangerName = new JLabel("<html><br>The X:changer</html>"); //Rubriken på appen
+    JLabel xChangerName = new JLabel("<html><p style =' color: white;'><br>The X:changer</html>"); //Rubriken på appen
     JLabel tillLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Till:</p>"); //Label där det står till
     JLabel frånLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Från:</p>"); //Label där det står från
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
     JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 SEK =" +
             "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>" +
-            "<p style='font-size:12px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
-    JLabel sourceOfData = new JLabel("<html>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
+            "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
+    JLabel sourceOfData = new JLabel("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
@@ -107,10 +108,29 @@ public class GUI extends JFrame implements Subscriber {
 
 
         //Ändra storlek på convert knappen
-        int convertwidth = 200;
+        int convertwidth = 100;
         int convertheigth = 40;
+        //Rounded butto
+        SwingUtilities.invokeLater(() -> {
+            JFrame roundedButtonFrame = new JFrame("Rundad knapp");
+            roundedButtonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            roundedButtonFrame.setSize(300, 200);
+            JButton convertButton = new JButton("Convert");
+
+            convertButton.setBorder(new RoundedBorder(10));
+
+            roundedButtonFrame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
+            roundedButtonFrame.getContentPane().add(convertButton);
+            roundedButtonFrame.setVisible(true);
+
+        });
+
+
+
+
         Dimension newDimensionConvertButton = new Dimension(convertwidth, convertheigth);
         convertButton.setPreferredSize(newDimensionConvertButton);
+        convertButton.setBackground(colorOfButton);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.PAGE_END;
@@ -149,6 +169,21 @@ public class GUI extends JFrame implements Subscriber {
         //setResizable(false);
 
     }
+    static class RoundedBorder implements Border{
+        private int radius;
+        RoundedBorder(int radius){
+            this.radius = radius;
+        }
+        public Insets getBorderInsets(Component c){
+            return new Insets(this.radius +1, this.radius+1,this.radius+1,this.radius+1);
+        }
+        public boolean isBorderOpaque(){
+            return true;
+        }
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height){
+            g.drawRoundRect(x,y,width -1, height-1, radius,radius);
+        }
+    }
 
     public JButton getConvertButton() {
         return convertButton;
@@ -174,7 +209,6 @@ public class GUI extends JFrame implements Subscriber {
         dateOfExchange.setText(date);
     }
 
-
     @Override
     public void update(ExchangeInfo o) {
         xChangerName.setText(String.valueOf(o.getRate()));
@@ -183,6 +217,7 @@ public class GUI extends JFrame implements Subscriber {
         repaint();
     }
 }
+
 
 
     /*public static void main(String[] args) {
