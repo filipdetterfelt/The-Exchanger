@@ -28,6 +28,10 @@ public class GUI extends JFrame {
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
 
+    // Create a new JDialog for the loading screen
+    // Create a new ImageIcon for the spinner
+
+
     public GUI() {
 
         //Lägg till bilden på granen här
@@ -71,8 +75,9 @@ public class GUI extends JFrame {
         gbc.gridy = 1;
         frånValuta.setColumns(5);
         centerPanel.add(frånValuta, gbc);
-        frånValuta.setText("000000");
-
+        frånValuta.setText("");
+        tillValuta.setFocusable(false);
+        tillValuta.setEditable(false);
 
         /*gbc.gridx = 1;
         gbc.gridy = 1;
@@ -82,6 +87,8 @@ public class GUI extends JFrame {
 
 
         //Lägger till tillLabel och tillValutaComboBox i centrum
+        frånValutaComboBox.setSelectedItem(Currencies.SEK);
+        tillValutaComboBox.setSelectedItem(Currencies.USD);
 
         gbc.gridx = 2; //Öka gridX för att flytta den mer åt höger
         gbc.gridy = 0;
@@ -113,7 +120,6 @@ public class GUI extends JFrame {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.PAGE_END;
         centerPanel.add(convertButton, gbc);
-
 
 
         //Bottompanel
@@ -149,17 +155,25 @@ public class GUI extends JFrame {
     public JComboBox<Currencies> getFrånValutaComboBox() {
         return frånValutaComboBox;
     }
+
     public JComboBox<Currencies> getTillValutaComboBox() {
         return tillValutaComboBox;
     }
 
-    public void updateExchangedAmount(double amount){
+    public JTextField getFrånValuta() {
+        return frånValuta;
+    }
+
+    public JTextField getTillValuta() {
+        return tillValuta;
+    }
+
+    public void updateExchangedAmount(double amount) {
         tillValuta.setText(String.valueOf(amount));
     }
-    // frånValutaComboBox.getSelectedItem().;
-    public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
+    public void updateRateInformation(Enum<Currencies> fromCurrency, Enum<Currencies> toCurrency, double rate, double reversedRate) {
 
-        Currencies fromCurrencyEnum= (Currencies) fromCurrency;
+        Currencies fromCurrencyEnum = (Currencies) fromCurrency;
         String fromCurrencyString = fromCurrencyEnum.fullName;
 
         Currencies toCurrencyEnum = (Currencies) toCurrency;
@@ -173,14 +187,7 @@ public class GUI extends JFrame {
         //rateInformation = "HTML kod här"
     }
 
-    public void updateExchangedDate(String date){
+    public void updateExchangedDate(String date) {
         dateOfExchange.setText(date);
     }
 }
-
-
-    /*public static void main(String[] args) {
-        Gui g = new Gui();
-        g.drawXchangePanel();
-    }*/
-
