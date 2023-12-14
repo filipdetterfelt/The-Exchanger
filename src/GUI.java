@@ -15,7 +15,7 @@ public class GUI extends JFrame implements Subscriber {
     JPanel bottomPanel = new JPanel();
 
 
-    JButton convertButton = new JButton("<html><p style ='color: black;'>Convert</p>"); //Knapp för att konvertera valutan
+    //JButton convertButton = new JButton("<html><p style ='color: black;'>Convert</p>"); //Knapp för att konvertera valutan
     JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
@@ -74,7 +74,7 @@ public class GUI extends JFrame implements Subscriber {
         gbc.gridy = 1;
         frånValuta.setColumns(5);
         centerPanel.add(frånValuta, gbc);
-        frånValuta.setText("000000");
+        frånValuta.setText("0");
 
 
         /*gbc.gridx = 1;
@@ -110,31 +110,16 @@ public class GUI extends JFrame implements Subscriber {
         //Ändra storlek på convert knappen
         int convertwidth = 100;
         int convertheigth = 40;
-        //Rounded butto
-        SwingUtilities.invokeLater(() -> {
-            JFrame roundedButtonFrame = new JFrame("Rundad knapp");
-            roundedButtonFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            roundedButtonFrame.setSize(300, 200);
-            JButton convertButton = new JButton("Convert");
-
-            convertButton.setBorder(new RoundedBorder(10));
-
-            roundedButtonFrame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
-            roundedButtonFrame.getContentPane().add(convertButton);
-            roundedButtonFrame.setVisible(true);
-
-        });
 
 
-
-
-        Dimension newDimensionConvertButton = new Dimension(convertwidth, convertheigth);
+            //Knappen för convert
+       /* Dimension newDimensionConvertButton = new Dimension(convertwidth, convertheigth);
         convertButton.setPreferredSize(newDimensionConvertButton);
         convertButton.setBackground(colorOfButton);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.PAGE_END;
-        centerPanel.add(convertButton, gbc);
+        centerPanel.add(convertButton, gbc);*/
 
 
 
@@ -169,24 +154,25 @@ public class GUI extends JFrame implements Subscriber {
         //setResizable(false);
 
     }
-    static class RoundedBorder implements Border{
-        private int radius;
-        RoundedBorder(int radius){
-            this.radius = radius;
-        }
-        public Insets getBorderInsets(Component c){
-            return new Insets(this.radius +1, this.radius+1,this.radius+1,this.radius+1);
-        }
-        public boolean isBorderOpaque(){
-            return true;
-        }
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height){
-            g.drawRoundRect(x,y,width -1, height-1, radius,radius);
-        }
+
+
+   /* public JButton getConvertButton() {
+        return convertButton;
+    }*/
+    public JComboBox<Currencies> getFrånValutaComboBox() {
+        return frånValutaComboBox;
     }
 
-    public JButton getConvertButton() {
-        return convertButton;
+    public JComboBox<Currencies> getTillValutaComboBox() {
+        return tillValutaComboBox;
+    }
+
+    public JTextField getFrånValuta() {
+        return frånValuta;
+    }
+
+    public JTextField getTillValuta() {
+        return tillValuta;
     }
 
     public void updateExchangedAmount(double amount){

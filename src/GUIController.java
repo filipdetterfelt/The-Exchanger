@@ -20,7 +20,7 @@ public class GUIController implements ActionListener, Subscriber {
         this.gui = gui;
         this.frånValutaField = gui.getFrånValuta();
 
-    gui.getConvertButton().addActionListener(this);
+   // gui.getConvertButton().addActionListener(this);
     gui.getFrånValutaComboBox().addActionListener(this);
     gui.getTillValutaComboBox().addActionListener(this);
     gui.getFrånValuta().addActionListener(this);
@@ -65,13 +65,13 @@ public class GUIController implements ActionListener, Subscriber {
                 tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
             }
 
-            if (e.getSource() == gui.getConvertButton()) {
+           /* if (e.getSource() == gui.getConvertButton()) {
                 if (isValidInput(originalAmount)) {
                     double amount = Double.parseDouble(originalAmount);
                     api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
                 }
 
-            }
+            }*/
         }
     @Override
     public void update(ExchangeInfo info) {
