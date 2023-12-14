@@ -73,8 +73,8 @@ public class GUI extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
         centerPanel.add(frånLabel, gbc);
 
-        gbc.gridx = 2;
-        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 10;
         swapButtonLabel.setPreferredSize(new Dimension(30,30));         //ändrar storlek på swapbutton
         swapButtonLabel.setIcon(swapButtonIcon);
         //swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
