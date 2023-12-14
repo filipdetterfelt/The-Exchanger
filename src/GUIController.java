@@ -92,6 +92,6 @@ public class GUIController implements ActionListener, Subscriber {
     }
 
     public boolean isValidInput(String amount) {
-        return amount.matches("[0-9]+");
+        return amount.matches("[0-9]+") && amount.length() < 8;
     }
 }
