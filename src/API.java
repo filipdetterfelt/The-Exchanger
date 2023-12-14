@@ -9,8 +9,8 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class API implements Observed {
-    private static String API_KEY = "c419a2f16c0967ee3eaa58f1";
-    private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
+    private String API_KEY = "c419a2f16c0967ee3eaa58f1";
+    private final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
     private final ArrayList<Subscriber> listOfObservers = new ArrayList<>();
 
     public void setApiExchangeInput(Enum<Currencies> baseCurrencyEnum, Enum<Currencies> targetCurrencyEnum, double conversionAmount) {
@@ -56,7 +56,7 @@ public class API implements Observed {
         return exchangeInfoMap;
     }*/
 
-    private static JsonObject getJsonObject(HttpURLConnection request) throws IOException {
+    private JsonObject getJsonObject(HttpURLConnection request) throws IOException {
         /*InputStream inputStream = request.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader reader = new BufferedReader(inputStreamReader);
