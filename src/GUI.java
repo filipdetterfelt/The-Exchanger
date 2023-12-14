@@ -8,14 +8,10 @@ public class GUI extends JFrame {
     ImageIcon swapButtonIcon = new ImageIcon("src/resources/exchange.png");
     Color myColor = Color.decode("#052543");
 
-
-    //JPanel headPanel = new JPanel();
     JPanel topPanel = new JPanel(new BorderLayout()); //Huvudpanelen för appen
     JPanel centerPanel = new JPanel();
     JPanel bottomPanel = new JPanel();
 
-
-   // JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
     JLabel xChangerName = new JLabel("<html><p style =' color: white;'><br>The X:changer</html>"); //Rubriken på appen
@@ -32,7 +28,6 @@ public class GUI extends JFrame {
     JLabel dateOfExchange = new JLabel();
 
     JLabel swapButtonLabel = new JLabel();
-
 
     public GUI() {
         //Lägg till bilden på granen här
@@ -54,8 +49,6 @@ public class GUI extends JFrame {
         topPanel.setBackground(myColor);
         centerPanel.setBackground(myColor);
         bottomPanel.setBackground(myColor);
-
-
 
         centerPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -122,16 +115,9 @@ public class GUI extends JFrame {
 
     }
 
-
-   /* public JButton getConvertButton() {
-        return convertButton;
-    }*/
-
     public JLabel getSwapButtonLabel() {
         return swapButtonLabel;
     }
-
-
 
     public JComboBox<Currencies> getFrånValutaComboBox() {
         return frånValutaComboBox;
@@ -140,14 +126,6 @@ public class GUI extends JFrame {
     public JComboBox<Currencies> getTillValutaComboBox() {
         return tillValutaComboBox;
     }
-
-    public void setCurrencyFromValutaComboBox(){
-
-       // frånValutaComboBox.setSelectedItem();
-
-    }
-
-
 
     public JTextField getFrånValuta() {
         return frånValuta;
@@ -178,13 +156,3 @@ public class GUI extends JFrame {
     }
 
 }
-
-
-
-
-
-    /*public static void main(String[] args) {
-        Gui g = new Gui();
-        g.drawXchangePanel();
-    }*/
-

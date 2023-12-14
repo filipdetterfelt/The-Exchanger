@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GUIController implements ActionListener, Subscriber, MouseListener {
+public class GUIController implements ActionListener, Observer, MouseListener {
 
     GUI gui;
     API api;
@@ -15,14 +15,13 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
     Currencies tillValutaComboBox = Currencies.USD;
     JTextField frånValutaField;
     Timer timer;
-    String originalAmount= "0";          //Måste finnas bokstäver här pga null-värde
+    String originalAmount= "0";
 
     GUIController(API api, GUI gui) {
         this.api = api;
         this.gui = gui;
         this.frånValutaField = gui.getFrånValuta();
 
-   // gui.getConvertButton().addActionListener(this);
     gui.getFrånValutaComboBox().addActionListener(this);
     gui.getTillValutaComboBox().addActionListener(this);
     gui.getFrånValuta().addActionListener(this);
@@ -42,19 +41,19 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
         @Override
         public void insertUpdate(DocumentEvent e) {
             updateInputText(gui);
-            timer.restart();
+            restartTimer();
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             updateInputText(gui);
-            timer.restart();
+            restartTimer();
         }
 
         @Override
         public void changedUpdate(DocumentEvent e) {
             updateInputText(gui);
-            timer.restart();
+            restartTimer();
         }
     });
 }
@@ -69,17 +68,10 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
                 JComboBox<Currencies> comboBox = gui.getTillValutaComboBox();
                 tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
             }
-           /* if (e.getSource() == gui.getConvertButton()) {
-                if (isValidInput(originalAmount)) {
-                    double amount = Double.parseDouble(originalAmount);
-                    api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
-                }
-
-            }*/
         }
 
     @Override
-    public void update(ExchangeInfo info) {
+    public void update(Object info) {
         gui.updateExchangedAmount(info.getExchangedAmount());
         gui.updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());
@@ -105,6 +97,13 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
         gui.tillValutaComboBox.setSelectedItem(currencyFromFirstComboBox);
 
         updateInputText(gui);
+        timer.restart();
+    }
+
+    public void restartTimer() {
+        if (timer.isRunning()) {
+            timer.stop();
+        }
         timer.restart();
     }
 
