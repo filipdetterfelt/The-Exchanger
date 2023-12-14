@@ -82,10 +82,6 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
             }*/
         }
 
-
-
-
-
     @Override
     public void update(ExchangeInfo info) {
         gui.updateExchangedAmount(info.getExchangedAmount());
@@ -103,6 +99,15 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
             gui.tillValuta.repaint();
         }
     }
+    public void swapFromToLabels() {
+        JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
+        Enum<Currencies> currencyFromFirstComboBox = (Currencies) comboBox.getSelectedItem();
+        JComboBox<Currencies> comboBox2 = gui.getTillValutaComboBox();
+        Enum<Currencies> currencyFromSecondComboBox = (Currencies) comboBox2.getSelectedItem();
+
+        gui.frånValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
+        gui.tillValutaComboBox.setSelectedItem(currencyFromFirstComboBox);
+    }
 
     public boolean isValidInput(String amount) {
         return amount.matches("[0-9]+") && amount.length() < 8;
@@ -110,63 +115,8 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-        System.out.println("working click");
         swapFromToLabels();
-
     }
-
-    public void swapFromToLabels() {
-
-             Enum<Currencies> currencyFromFirstComboBox;
-             Enum<Currencies> currencyFromSecondComboBox;
-
-
-            JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
-            currencyFromFirstComboBox = (Currencies) comboBox.getSelectedItem();
-
-            Enum <Currencies> tempCurrency = currencyFromFirstComboBox;         //temporarily är selected i första boxen
-
-
-
-
-           JComboBox<Currencies> comboBoxTill = gui.tillValutaComboBox;
-
-            currencyFromSecondComboBox = (Currencies) comboBox.getSelectedItem();
-
-        gui.frånValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
-            currencyFromFirstComboBox = currencyFromSecondComboBox;
-            currencyFromSecondComboBox = (Currencies) tempCurrency;
-
-
-            gui.tillValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
-
-
-
-
-            /*
-            JComboBox<Currencies> comboBoxtill = gui.getTillValutaComboBox();
-
-            JComboBox<Currencies> temp = (Currencies) frånValutaComboBox;
-
-
-             frånValutaComboBox = gui.getTillValutaComboBox();
-            tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
-
-
-        */
-
-
-    }
-
-
-
-
-
-
-
-
-
 
     @Override
     public void mousePressed(MouseEvent e) {
