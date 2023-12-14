@@ -2,7 +2,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class GUI extends JFrame implements Subscriber {
+public class GUI extends JFrame {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
     Color myColor = Color.decode("#052543");
@@ -97,6 +97,7 @@ public class GUI extends JFrame implements Subscriber {
         centerPanel.add(tillValutaComboBox, gbc);
         gbc.gridx = 3; //Flyttar gridx med 1 så att den hamnar till höger om combobox
         tillValuta.setColumns(5); //Ändrar bredden på textfield
+        tillValuta.setFocusable(false);
         centerPanel.add(tillValuta, gbc);
 
        /* gbc.gridx = 3;
@@ -195,13 +196,6 @@ public class GUI extends JFrame implements Subscriber {
         dateOfExchange.setText(date);
     }
 
-    @Override
-    public void update(ExchangeInfo o) {
-        xChangerName.setText(String.valueOf(o.getRate()));
-        System.out.println("inne i update");
-        revalidate();
-        repaint();
-    }
 }
 
 
