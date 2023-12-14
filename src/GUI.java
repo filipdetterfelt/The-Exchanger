@@ -98,6 +98,7 @@ public class GUI extends JFrame {
         gbc.gridx = 3; //Flyttar gridx med 1 så att den hamnar till höger om combobox
         tillValuta.setColumns(5); //Ändrar bredden på textfield
         tillValuta.setFocusable(false);
+        tillValuta.setEditable(false);
         centerPanel.add(tillValuta, gbc);
 
        /* gbc.gridx = 3;
