@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     JPanel bottomPanel = new JPanel();
 
 
-    JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
+   // JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
     JLabel xChangerName = new JLabel("<html><p style =' color: white;'><br>The X:changer</html>"); //Rubriken på appen
@@ -34,6 +34,7 @@ public class GUI extends JFrame {
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
+
     JLabel swapButtonLabel = new JLabel();
 
 
@@ -72,10 +73,13 @@ public class GUI extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
         centerPanel.add(frånLabel, gbc);
 
-        swapButtonLabel.setPreferredSize(new Dimension(150,150));         //ändrar storlek på swapbutton
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        swapButtonLabel.setPreferredSize(new Dimension(30,30));         //ändrar storlek på swapbutton
         swapButtonLabel.setIcon(swapButtonIcon);
-        swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        centerPanel.add(swapButtonLabel);
+        //swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        centerPanel.add(swapButtonLabel, gbc);
+
 
 
         gbc.gridx = 0;
@@ -116,7 +120,8 @@ public class GUI extends JFrame {
 
 
         setTitle("The X:changer");
-        setSize(400, 650);
+        //setSize(400, 650);
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -128,6 +133,13 @@ public class GUI extends JFrame {
    /* public JButton getConvertButton() {
         return convertButton;
     }*/
+
+    public JLabel getSwapButtonLabel() {
+        return swapButtonLabel;
+    }
+
+
+
     public JComboBox<Currencies> getFrånValutaComboBox() {
         return frånValutaComboBox;
     }
@@ -135,6 +147,14 @@ public class GUI extends JFrame {
     public JComboBox<Currencies> getTillValutaComboBox() {
         return tillValutaComboBox;
     }
+
+    public void setCurrencyFromValutaComboBox(){
+
+       // frånValutaComboBox.setSelectedItem();
+
+    }
+
+
 
     public JTextField getFrånValuta() {
         return frånValuta;
@@ -165,6 +185,8 @@ public class GUI extends JFrame {
     }
 
 }
+
+
 
 
 

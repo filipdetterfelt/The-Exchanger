@@ -3,8 +3,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class GUIController implements ActionListener, Subscriber {
+public class GUIController implements ActionListener, Subscriber, MouseListener {
 
     GUI gui;
     API api;
@@ -25,13 +27,17 @@ public class GUIController implements ActionListener, Subscriber {
     gui.getTillValutaComboBox().addActionListener(this);
     gui.getFrånValuta().addActionListener(this);
     gui.getTillValuta().addActionListener(this);
-        //Timer för delay i API-utskick
-        timer = new Timer(1000, e -> {
-            if(!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
-                System.out.println("Sending to API");
-                api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
-            }
-        });
+    gui.getSwapButtonLabel().addMouseListener(this);
+
+
+
+            //Timer för delay i API-utskick
+            timer = new Timer(1000, e -> {
+                if (!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
+                    System.out.println("Sending to API");
+                    api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
+                }
+            });
         timer.setRepeats(false);
 
     gui.getFrånValuta().getDocument().addDocumentListener(new DocumentListener() {
@@ -65,6 +71,7 @@ public class GUIController implements ActionListener, Subscriber {
                 JComboBox<Currencies> comboBox = gui.getTillValutaComboBox();
                 tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
             }
+            //if (e.getSource() == gui.swapButtonLabel
 
            /* if (e.getSource() == gui.getConvertButton()) {
                 if (isValidInput(originalAmount)) {
@@ -74,6 +81,11 @@ public class GUIController implements ActionListener, Subscriber {
 
             }*/
         }
+
+
+
+
+
     @Override
     public void update(ExchangeInfo info) {
         gui.updateExchangedAmount(info.getExchangedAmount());
@@ -94,5 +106,85 @@ public class GUIController implements ActionListener, Subscriber {
 
     public boolean isValidInput(String amount) {
         return amount.matches("[0-9]+") && amount.length() < 8;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        System.out.println("working click");
+        swapFromToLabels();
+
+    }
+
+    public void swapFromToLabels() {
+
+             Enum<Currencies> currencyFromFirstComboBox;
+             Enum<Currencies> currencyFromSecondComboBox;
+
+
+            JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
+            currencyFromFirstComboBox = (Currencies) comboBox.getSelectedItem();
+
+            Enum <Currencies> tempCurrency = currencyFromFirstComboBox;         //temporarily är selected i första boxen
+
+
+
+
+           JComboBox<Currencies> comboBoxTill = gui.tillValutaComboBox;
+
+            currencyFromSecondComboBox = (Currencies) comboBox.getSelectedItem();
+
+        gui.frånValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
+            currencyFromFirstComboBox = currencyFromSecondComboBox;
+            currencyFromSecondComboBox = (Currencies) tempCurrency;
+
+
+            gui.tillValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
+
+
+
+
+            /*
+            JComboBox<Currencies> comboBoxtill = gui.getTillValutaComboBox();
+
+            JComboBox<Currencies> temp = (Currencies) frånValutaComboBox;
+
+
+             frånValutaComboBox = gui.getTillValutaComboBox();
+            tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
+
+
+        */
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
