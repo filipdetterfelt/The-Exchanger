@@ -29,16 +29,14 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
     gui.getTillValuta().addActionListener(this);
     gui.getSwapButtonLabel().addMouseListener(this);
 
-
-
             //Timer för delay i API-utskick
-            timer = new Timer(1000, e -> {
-                if (!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
-                    System.out.println("Sending to API");
-                    api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
-                }
+    timer = new Timer(1000, e -> {
+        if (!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
+            System.out.println("Sending to API");
+            api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
+        }
             });
-        timer.setRepeats(false);
+    timer.setRepeats(false);
 
     gui.getFrånValuta().getDocument().addDocumentListener(new DocumentListener() {
         @Override
@@ -71,8 +69,6 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
                 JComboBox<Currencies> comboBox = gui.getTillValutaComboBox();
                 tillValutaComboBox = (Currencies) comboBox.getSelectedItem();
             }
-            //if (e.getSource() == gui.swapButtonLabel
-
            /* if (e.getSource() == gui.getConvertButton()) {
                 if (isValidInput(originalAmount)) {
                     double amount = Double.parseDouble(originalAmount);
@@ -107,34 +103,28 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
 
         gui.frånValutaComboBox.setSelectedItem(currencyFromSecondComboBox);
         gui.tillValutaComboBox.setSelectedItem(currencyFromFirstComboBox);
+
+        updateInputText(gui);
+        timer.restart();
     }
 
     public boolean isValidInput(String amount) {
         return amount.matches("[0-9]+") && amount.length() < 8;
     }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         swapFromToLabels();
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 }
