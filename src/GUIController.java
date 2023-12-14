@@ -26,7 +26,7 @@ public class GUIController implements ActionListener, Subscriber {
     gui.getFrånValuta().addActionListener(this);
     gui.getTillValuta().addActionListener(this);
         //Timer för delay i API-utskick
-        timer = new Timer(1500, e -> {
+        timer = new Timer(1000, e -> {
             if(!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
                 System.out.println("Sending to API");
                 api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
