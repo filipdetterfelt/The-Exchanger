@@ -25,22 +25,31 @@ public class GUIController implements ActionListener, Subscriber {
     gui.getTillValutaComboBox().addActionListener(this);
     gui.getFrånValuta().addActionListener(this);
     gui.getTillValuta().addActionListener(this);
+        //Timer för delay i API-utskick
+        timer = new Timer(1500, e -> {
+            if(!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
+                System.out.println("Sending to API");
+                api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
+            }
+        });
+        timer.setRepeats(false);
     gui.getFrånValuta().getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
             updateInputText(gui);
             timer.restart();
-
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             updateInputText(gui);
+            timer.restart();
         }
 
         @Override
         public void changedUpdate(DocumentEvent e) {
             updateInputText(gui);
+            timer.restart();
         }
     });
 }
@@ -73,20 +82,12 @@ public class GUIController implements ActionListener, Subscriber {
     public void updateInputText(GUI gui) {
         originalAmount = gui.frånValuta.getText();
         if (isValidInput(originalAmount) && !originalAmount.equals("0") && !originalAmount.isEmpty()) {
-            double amount = Double.parseDouble(originalAmount);
-            timer = new Timer(1500, e -> {
-                if(!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
-                    api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+            amount = Double.parseDouble(originalAmount);
         }
         else if (originalAmount.isEmpty() || originalAmount.equals("0")) {
             amount = 0;
             gui.tillValuta.setText("0");
             gui.tillValuta.repaint();
-
         }
     }
 

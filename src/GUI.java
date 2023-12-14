@@ -28,9 +28,6 @@ public class GUI extends JFrame {
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
 
-    // Create a new JDialog for the loading screen
-    // Create a new ImageIcon for the spinner
-
 
     public GUI() {
 
