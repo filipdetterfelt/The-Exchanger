@@ -16,7 +16,6 @@ public class ExchangeInfo {
 
     public Enum<Currencies> getBaseCurrency() {
         return baseCurrency;
-
     }
 
     public void setBaseCurrency(Enum<Currencies> baseCurrency) {
