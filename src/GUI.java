@@ -5,8 +5,12 @@ import java.awt.*;
 public class GUI extends JFrame {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
+
+    ImageIcon swapButtonIcon = new ImageIcon("src/resources/exchange.png");
+
     Color myColor = Color.decode("#052543");
     Color colorOfButton = Color.decode("#FFCF41");
+
 
 
     //JPanel headPanel = new JPanel();
@@ -30,6 +34,8 @@ public class GUI extends JFrame {
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
+    JLabel swapButtonLabel = new JLabel();
+
 
     public GUI() {
         //Lägg till bilden på granen här
@@ -53,6 +59,7 @@ public class GUI extends JFrame {
         bottomPanel.setBackground(myColor);
 
 
+
         centerPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -64,6 +71,12 @@ public class GUI extends JFrame {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.LINE_START;
         centerPanel.add(frånLabel, gbc);
+
+        swapButtonLabel.setPreferredSize(new Dimension(150,150));         //ändrar storlek på swapbutton
+        swapButtonLabel.setIcon(swapButtonIcon);
+        swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        centerPanel.add(swapButtonLabel);
+
 
         gbc.gridx = 0;
         gbc.gridy = 1;

@@ -33,6 +33,7 @@ public class GUIController implements ActionListener, Subscriber {
             }
         });
         timer.setRepeats(false);
+
     gui.getFrånValuta().getDocument().addDocumentListener(new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
