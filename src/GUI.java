@@ -5,12 +5,8 @@ import java.awt.*;
 public class GUI extends JFrame {
 
     ImageIcon originalJulgranIcon = new ImageIcon("src/resources/tree.png");
-
     ImageIcon swapButtonIcon = new ImageIcon("src/resources/exchange.png");
-
     Color myColor = Color.decode("#052543");
-    Color colorOfButton = Color.decode("#FFCF41");
-
 
 
     //JPanel headPanel = new JPanel();
@@ -73,15 +69,6 @@ public class GUI extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
         centerPanel.add(frånLabel, gbc);
 
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        swapButtonLabel.setPreferredSize(new Dimension(30,30));         //ändrar storlek på swapbutton
-        swapButtonLabel.setIcon(swapButtonIcon);
-        //swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        centerPanel.add(swapButtonLabel, gbc);
-
-
-
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -95,18 +82,24 @@ public class GUI extends JFrame {
         frånValutaComboBox.setSelectedItem(Currencies.SEK);
         tillValutaComboBox.setSelectedItem(Currencies.USD);
 
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        swapButtonLabel.setPreferredSize(new Dimension(30,30));         //ändrar storlek på swapbutton
+        swapButtonLabel.setIcon(swapButtonIcon);
+        //swapButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        centerPanel.add(swapButtonLabel, gbc);
+
         //Lägger till tillLabel och tillValutaComboBox i centrum
 
-        gbc.gridx = 2; //Öka gridX för att flytta den mer åt höger
+        gbc.gridx = 3; //Öka gridX för att flytta den mer åt höger
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(tillLabel, gbc);
 
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(tillValutaComboBox, gbc);
-        gbc.gridx = 3; //Flyttar gridx med 1 så att den hamnar till höger om combobox
+        gbc.gridx = 4; //Flyttar gridx med 1 så att den hamnar till höger om combobox
         tillValuta.setColumns(5); //Ändrar bredden på textfield
         tillValuta.setFocusable(false);
         tillValuta.setEditable(false);
