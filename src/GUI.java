@@ -14,22 +14,24 @@ public class GUI extends JFrame implements Subscriber {
     JPanel bottomPanel = new JPanel();
 
 
-    JButton convertButton = new JButton("Convert"); //Knapp för att konvertera valutan
+    JButton convertButton = new JButton("<html><p style ='color: black;'>Convert</p>"); //Knapp för att konvertera valutan
     JButton swapButton = new JButton(); //Knapp för att swappa valörer (Lägg in pilar)
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
-    JLabel xChangerName = new JLabel("The X:changer"); //Rubriken på appen
-    JLabel tillLabel = new JLabel("Till:"); //Label där det står till
-    JLabel frånLabel = new JLabel("Från:"); //Label där det står från
+    JLabel xChangerName = new JLabel("<html><br>The X:changer</html>"); //Rubriken på appen
+    JLabel tillLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Till:</p>"); //Label där det står till
+    JLabel frånLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Från:</p>"); //Label där det står från
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
-    JLabel rateInformation = new JLabel(); //Label för att presentera nuvarande kurs
-    JLabel sourceOfData = new JLabel("Data extracted from"); //Label för att pressentera källan av datan
+    JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 SEK =" +
+            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>" +
+            "<p style='font-size:12px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
+    JLabel sourceOfData = new JLabel("<html>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
+            ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
 
     public GUI() {
-
         //Lägg till bilden på granen här
         topPanel.add(iconChristmasTree, BorderLayout.SOUTH);
         iconChristmasTree.setIcon(originalJulgranIcon);
@@ -117,14 +119,19 @@ public class GUI extends JFrame implements Subscriber {
 
 
         //Bottompanel
-        gbc.insets = new Insets(5, 5, 5, 5);
+        bottomPanel.setLayout(new BorderLayout());
+        bottomPanel.add(rateInformation,BorderLayout.NORTH);
+        bottomPanel.add(sourceOfData,BorderLayout.SOUTH);
+      /*  gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         bottomPanel.add(rateInformation, gbc);
+
         gbc.gridx = 0;
         gbc.gridy = 1;
-        bottomPanel.add(sourceOfData, gbc);
+        //bottomPanel.add(sourceOfData, gbc);*/
+
 
 
        /* centerPanel.add(frånLabel);
@@ -152,8 +159,15 @@ public class GUI extends JFrame implements Subscriber {
     }
 
     public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
+      /*  JEditorPane editorPane = new JEditorPane();
+        editorPane.setEditable(false);
+        editorPane.setContentType("text/html");
         //rateInformation = "HTML kod här"
-        rateInformation.setText(toCurrency);
+        //rateInformation =new JLabel("<html><font color='red' size='4'text</font>");
+        String htmlText = String.format("<html><h1 style ='color: white;'>1 SEK = <br>0.0953 US Dollars</h1>" +
+                "<p style='font-size:12px;'>1 USD ? 10.4893 SEK</p></html>");
+        rateInformation.setText(htmlText);
+        //rateInformation.setText(toCurrency);*/
     }
 
     public void updateExchangedDate(String date){
