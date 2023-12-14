@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GUIController implements ActionListener, Subscriber, MouseListener {
+public class GUIController implements ActionListener, Observer, MouseListener {
 
     GUI gui;
     API api;
@@ -71,7 +71,7 @@ public class GUIController implements ActionListener, Subscriber, MouseListener 
         }
 
     @Override
-    public void update(ExchangeInfo info) {
+    public void update(Object info) {
         gui.updateExchangedAmount(info.getExchangedAmount());
         gui.updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());

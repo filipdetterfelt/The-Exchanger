@@ -8,10 +8,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
-public class API implements Observed {
-    private static String API_KEY = "c419a2f16c0967ee3eaa58f1";
-    private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
-    private final ArrayList<Subscriber> listOfObservers = new ArrayList<>();
+public class API implements Subject {
+    private String API_KEY = "c419a2f16c0967ee3eaa58f1";
+    private final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
+    private final ArrayList<Observer> listOfObservers = new ArrayList<>();
 
     public void setApiExchangeInput(Enum<Currencies> baseCurrencyEnum, Enum<Currencies> targetCurrencyEnum, double conversionAmount) {
 
@@ -29,39 +29,25 @@ public class API implements Observed {
             String timeLastUpdateUtc = jsonObj.get("time_last_update_utc").toString();
             String result = jsonObj.get("result").toString(); //Berättar om det gick att omvandla
 
-            if(result.equalsIgnoreCase("\"success\"")) {
-                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
+            if (result.equalsIgnoreCase("\"success\"")) {
+                Object info = new Object(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
                 notifySubscriber(info);
 
-            } else if (result.equalsIgnoreCase("quota-reached")) {                                                //om API key är slut
-                if (API_KEY.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {                                       //och nya API key är slut
+            } else if (result.equalsIgnoreCase("quota-reached")) { //om API key är slut
+                if (API_KEY.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {
                     System.out.println("account has reached the the number of requests allowed by your plan");
-                    System.exit(0);                                                                                    //stängs programmet
+                    System.exit(0);
                 }
-                API_KEY = "363262aeabe3f69bc894fef0";                                                                        //sätter ny backup API
-                setApiExchangeInput(baseCurrencyEnum, targetCurrencyEnum, conversionAmount);                                //återskapar
+                API_KEY = "363262aeabe3f69bc894fef0";
+                setApiExchangeInput(baseCurrencyEnum, targetCurrencyEnum, conversionAmount);
             }
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
     }
-    /*public Map<String, ExchangeInfo> currencyExtractedInfoMap(ExchangeInfo info) {
 
-        Map<String, ExchangeInfo> exchangeInfoMap = new HashMap<>();
-
-        exchangeInfoMap.put(info.getTargetCurrency(), info);
-
-
-        return exchangeInfoMap;
-    }*/
-
-    private static JsonObject getJsonObject(HttpURLConnection request) throws IOException {
-        /*InputStream inputStream = request.getInputStream();
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        */
-        ////Skrev om bort kommenterade rader över till undre rad
+    private JsonObject getJsonObject(HttpURLConnection request) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
 
         // Konvertera svaret till en sträng
@@ -72,30 +58,24 @@ public class API implements Observed {
         }
         reader.close();
 
-        // Använd GSON-biblioteket för att konvertera strängen till ett JSON-objekt
-        /*JsonParser parser = new JsonParser();
-        JsonElement root = parser.parse(response.toString());
-        JsonObject jsonobj = root.getAsJsonObject();
-        return jsonobj;*/
-        //Skrev om bort kommenterade rader över till undre rader
         JsonElement root = JsonParser.parseString(response.toString());
         return root.getAsJsonObject();
     }
 
     @Override
-    public void addSubscriber(Subscriber subscriber) {
-        this.listOfObservers.add(subscriber);
+    public void addSubscriber(Observer observer) {
+        this.listOfObservers.add(observer);
     }
 
     @Override
-    public void removeSubscriber(Subscriber subscriber) {
-        this.listOfObservers.remove( subscriber);
+    public void removeSubscriber(Observer observer) {
+        this.listOfObservers.remove(observer);
     }
 
     @Override
-    public void notifySubscriber(ExchangeInfo info) {
-        for (Subscriber subscriber : listOfObservers) {
-            subscriber.update(info);
+    public void notifySubscriber(Object info) {
+        for (Observer observer : listOfObservers) {
+            observer.update(info);
         }
     }
 }
