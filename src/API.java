@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class API implements Observed {
-    private static final String API_KEY = "c419a2f16c0967ee3eaa58f1";
+    private static String API_KEY = "c419a2f16c0967ee3eaa58f1";
     private static final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
     private final ArrayList<Subscriber> listOfObservers = new ArrayList<>();
 
@@ -33,8 +33,13 @@ public class API implements Observed {
                 ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
                 notifySubscriber(info);
 
-            } else if (result.equalsIgnoreCase("quota-reached")) {
-                System.out.println("account has reached the the number of requests allowed by your plan");
+            } else if (result.equalsIgnoreCase("quota-reached")) {                                                //om API key är slut
+                if (API_KEY.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {                                       //och nya API key är slut
+                    System.out.println("account has reached the the number of requests allowed by your plan");
+                    System.exit(0);                                                                                    //stängs programmet
+                }
+                API_KEY = "363262aeabe3f69bc894fef0";                                                                        //sätter ny backup API
+                setApiExchangeInput(baseCurrencyEnum, targetCurrencyEnum, conversionAmount);                                //återskapar
             }
 
         } catch (Exception e) {
