@@ -24,8 +24,8 @@ public class GUI extends JFrame {
     JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       " +
             "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 </h1>"+
             "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                   <br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
-    JLabel sourceOfData = new JLabel("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
-            ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
+    JLabel sourceOfData = new JLabel("<html><p style ='color: white; text-align: center'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
+            ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from </html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
 
@@ -121,9 +121,10 @@ public class GUI extends JFrame {
         bottomPanel.add(sourceOfData,BorderLayout.SOUTH);
 
 
+
         setTitle("The X:changer");
-        //setSize(400, 650);
-        pack();
+        setSize(470, 700);
+        //pack();
         //setSize(450,700);
         setLocationRelativeTo(null);
         setVisible(true);

@@ -1,9 +1,9 @@
 public interface Subject {
     // Needs ArrayList for the Observed class
     // ArrayList<Subscriber> listOfSubscribers = new ArrayList<>();
-    void addSubscriber(Observer observer);
+    void addObserver(Observer observer);
 
-    void removeSubscriber(Observer observer);
+    void removeObserver(Observer observer);
 
-    void notifySubscriber(Object data);
+    void notifyObserver(Object data);
 }

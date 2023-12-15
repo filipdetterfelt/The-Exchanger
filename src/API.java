@@ -27,11 +27,12 @@ public class API implements Subject {
             double conversionResult = jsonObj.get("conversion_result").getAsDouble();
             double conversionRate = jsonObj.get("conversion_rate").getAsDouble();
             String timeLastUpdateUtc = jsonObj.get("time_last_update_utc").toString();
+            String documentation = jsonObj.get("documentation").toString();
             String result = jsonObj.get("result").toString(); //Berättar om det gick att omvandla
 
             if (result.equalsIgnoreCase("\"success\"")) {
-                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
-                notifySubscriber(info);
+                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc, documentation);
+                notifyObserver(info);
 
             } else if (result.equalsIgnoreCase("quota-reached")) { //om API key är slut
                 if (apiKey.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {
@@ -63,17 +64,17 @@ public class API implements Subject {
     }
 
     @Override
-    public void addSubscriber(Observer observer) {
+    public void addObserver(Observer observer) {
         this.listOfObservers.add(observer);
     }
 
     @Override
-    public void removeSubscriber(Observer observer) {
+    public void removeObserver(Observer observer) {
         this.listOfObservers.remove(observer);
     }
 
     @Override
-    public void notifySubscriber(Object info) {
+    public void notifyObserver(Object info) {
         for (Observer observer : listOfObservers) {
             observer.update(info);
         }

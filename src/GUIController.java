@@ -77,6 +77,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
         gui.updateExchangedAmount(info.getExchangedAmount());
         updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());
+        updateSourceOfData(((ExchangeInfo) exchangeinfo).getDocumentation());
     }
     public void updateInputText(GUI gui) {
         originalAmount = gui.frånValuta.getText();
@@ -101,6 +102,11 @@ public class GUIController implements ActionListener, Observer, MouseListener {
         gui.rateInformation.setText("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 " +fromCurrency + " =" +
                 "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>" + formattedRate + " " +tempToCurrency.fullName+ "</h1>" +
                 "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + formattedRateReverse + " " + fromCurrency + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br></p></html>");
+    }
+
+    public void updateSourceOfData(String data){
+        gui.sourceOfData.setText("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
+                ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data extracted from " + data.substring(1, data.length()-6) + "</html>");
     }
     public void swapCurrenciesComboBox() {
         /*Timer timer2 = new Timer(1000, e -> {

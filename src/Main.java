@@ -5,6 +5,6 @@ public class Main {
         GUI gui = new GUI();
         GUIController guiController = new GUIController(api, gui);
 
-        api.addSubscriber(guiController);
+        api.addObserver(guiController);
     }
 }

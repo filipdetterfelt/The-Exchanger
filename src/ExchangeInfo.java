@@ -5,13 +5,15 @@ public class ExchangeInfo {
     private String date;
     private Enum<Currencies> baseCurrency;
     private Enum<Currencies> targetCurrency;
+    private String documentation;
 
-    ExchangeInfo(double exchangedAmount, double rate, Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrency, String date) {
+    ExchangeInfo(double exchangedAmount, double rate, Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrency, String date, String documentation) {
         this.exchangedAmount = exchangedAmount;
         this.rate = rate;
         this.date = date;
         this.baseCurrency = baseCurrency;
         this.targetCurrency = targetCurrency;
+        this.documentation = documentation;
     }
 
     public Enum<Currencies> getBaseCurrency() {
@@ -41,6 +43,11 @@ public class ExchangeInfo {
     public String getDate() {
         return date;
     }
+
+    public String getDocumentation() {
+        return documentation;
+    }
+
     public double getReverseRate() {
         reverseRate = convertRateToReverse(rate);
         return reverseRate;
