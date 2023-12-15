@@ -21,9 +21,9 @@ public class GUI extends JFrame {
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
 
-    JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 SEK =" +
-            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>"+
-            "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
+    JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       " +
+            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 </h1>"+
+            "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                   <br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
     JLabel sourceOfData = new JLabel("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
