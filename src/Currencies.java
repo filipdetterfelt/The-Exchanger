@@ -1,7 +1,6 @@
 import java.security.KeyStore;
 
 public enum Currencies {
-
     USD ("US Dollar"),
     GBP ("British Pounds"),
     EUR ("Euro"),
@@ -29,7 +28,6 @@ public enum Currencies {
     PHP ("Philippine peso"),
     PLN ("Polish zloty"),
     TRY ("Turkish lira");
-
 
     public final String fullName;
 
