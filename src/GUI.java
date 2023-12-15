@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class GUI extends JFrame {
 
@@ -19,6 +20,7 @@ public class GUI extends JFrame {
     JLabel frånLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Från:</p>"); //Label där det står från
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
+
     JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 SEK =" +
             "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>"+
             "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
@@ -151,7 +153,10 @@ public class GUI extends JFrame {
     }
 
     public void updateExchangedAmount(double amount){
-        tillValuta.setText(String.valueOf(amount));
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedValue = df.format(amount);
+        tillValuta.setText(String.valueOf(formattedValue));
     }
 
     public void updateExchangedDate(String date){

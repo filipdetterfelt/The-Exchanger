@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 
 public class GUIController implements ActionListener, Observer, MouseListener {
 
@@ -91,9 +92,15 @@ public class GUIController implements ActionListener, Observer, MouseListener {
 
     public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
         Currencies tempToCurrency = (Currencies) toCurrency;
+
+        DecimalFormat df = new DecimalFormat("#.####");
+        String formattedRate = df.format(rate);
+        String formattedRateReverse = df.format(reversedRate);
+
+
         gui.rateInformation.setText("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 " +fromCurrency + " =" +
-                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>" + rate + " " +tempToCurrency.fullName+ "</h1>" +
-                "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + reversedRate + " " + fromCurrency + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br></p></html>");
+                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>" + formattedRate + " " +tempToCurrency.fullName+ "</h1>" +
+                "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + formattedRateReverse + " " + fromCurrency + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br></p></html>");
     }
     public void swapCurrenciesComboBox() {
         /*Timer timer2 = new Timer(1000, e -> {
