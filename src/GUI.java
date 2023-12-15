@@ -31,6 +31,7 @@ public class GUI extends JFrame {
 
     public GUI() {
         //Lägg till bilden på granen här
+        System.out.println(rateInformation.getFont().toString());
         topPanel.add(iconChristmasTree, BorderLayout.SOUTH);
         iconChristmasTree.setIcon(originalJulgranIcon);
         iconChristmasTree.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,7 +69,7 @@ public class GUI extends JFrame {
         centerPanel.add(frånValutaComboBox, gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        frånValuta.setColumns(5);
+        frånValuta.setColumns(8);
         centerPanel.add(frånValuta, gbc);
         frånValuta.setText("0");
         //default values for dropbox
@@ -93,10 +94,23 @@ public class GUI extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(tillValutaComboBox, gbc);
         gbc.gridx = 4; //Flyttar gridx med 1 så att den hamnar till höger om combobox
-        tillValuta.setColumns(5); //Ändrar bredden på textfield
+        tillValuta.setColumns(8); //Ändrar bredden på textfield
         tillValuta.setFocusable(false);
         tillValuta.setEditable(false);
         centerPanel.add(tillValuta, gbc);
+
+        //dateOfExchange
+        gbc.anchor = GridBagConstraints.LAST_LINE_END;
+        gbc.insets = new Insets(1,0,0,0);
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.gridwidth = 3;
+        centerPanel.add(dateOfExchange, gbc);
+        dateOfExchange.setForeground(Color.WHITE);
+        dateOfExchange.setBorder(null);
+        dateOfExchange.setHorizontalTextPosition(SwingConstants.RIGHT);
+        dateOfExchange.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+        dateOfExchange.setText("        ");
 
 
         //Bottompanel
@@ -108,6 +122,7 @@ public class GUI extends JFrame {
         setTitle("The X:changer");
         //setSize(400, 650);
         pack();
+        //setSize(450,700);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -152,7 +167,7 @@ public class GUI extends JFrame {
     }
 
     public void updateExchangedDate(String date){
-        dateOfExchange.setText(date);
+        dateOfExchange.setText("Updated: " + date.substring(1,(date.length()-10)));
     }
 
 }
