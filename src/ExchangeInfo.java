@@ -1,4 +1,4 @@
-public class Object {
+public class ExchangeInfo {
     private double exchangedAmount;
     private double rate;
     private double reverseRate;
@@ -6,7 +6,7 @@ public class Object {
     private Enum<Currencies> baseCurrency;
     private Enum<Currencies> targetCurrency;
 
-    Object(double exchangedAmount, double rate, Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrency, String date) {
+    ExchangeInfo(double exchangedAmount, double rate, Enum<Currencies> baseCurrency, Enum<Currencies> targetCurrency, String date) {
         this.exchangedAmount = exchangedAmount;
         this.rate = rate;
         this.date = date;
