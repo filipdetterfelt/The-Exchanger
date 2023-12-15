@@ -21,9 +21,9 @@ public class GUI extends JFrame {
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
 
-    JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       " +
-            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 </h1>"+
-            "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                   <br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
+    JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
+            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </h1>"+
+            "<p style='font-size:15px; color: white;'>             <br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
     JLabel sourceOfData = new JLabel("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
     JLabel iconChristmasTree = new JLabel();
@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 
     public GUI() {
         //Lägg till bilden på granen här
-        System.out.println(rateInformation.getFont().toString());
+        //System.out.println(rateInformation.getFont().toString());
         topPanel.add(iconChristmasTree, BorderLayout.SOUTH);
         iconChristmasTree.setIcon(originalJulgranIcon);
         iconChristmasTree.setHorizontalAlignment(SwingConstants.CENTER);
@@ -122,8 +122,8 @@ public class GUI extends JFrame {
 
 
         setTitle("The X:changer");
-        //setSize(400, 650);
-        pack();
+        setSize(470, 650);
+        //pack();
         //setSize(450,700);
         setLocationRelativeTo(null);
         setVisible(true);
