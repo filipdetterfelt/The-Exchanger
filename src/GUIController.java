@@ -10,12 +10,12 @@ public class GUIController implements ActionListener, Observer, MouseListener {
 
     GUI gui;
     API api;
-    double amount;
+    private double amount;
     Currencies frånValutaComboBox = Currencies.SEK;
     Currencies tillValutaComboBox = Currencies.USD;
     JTextField frånValutaField;
     Timer timer;
-    String originalAmount= "0";
+    private String originalAmount= "0";
 
     GUIController(API api, GUI gui) {
         this.api = api;
@@ -71,7 +71,8 @@ public class GUIController implements ActionListener, Observer, MouseListener {
         }
 
     @Override
-    public void update(Object info) {
+    public void update(Object exchangeinfo) {
+        ExchangeInfo info = (ExchangeInfo) exchangeinfo;
         gui.updateExchangedAmount(info.getExchangedAmount());
         gui.updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());
@@ -87,7 +88,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
             gui.tillValuta.repaint();
         }
     }
-    public void swapFromToLabels() {
+    public void swapCurrenciesComboBox() {
         JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
         Enum<Currencies> currencyFromFirstComboBox = (Currencies) comboBox.getSelectedItem();
         JComboBox<Currencies> comboBox2 = gui.getTillValutaComboBox();
@@ -97,7 +98,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
         gui.tillValutaComboBox.setSelectedItem(currencyFromFirstComboBox);
 
         updateInputText(gui);
-        timer.restart();
+        restartTimer();
     }
 
     public void restartTimer() {
@@ -112,7 +113,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        swapFromToLabels();
+        swapCurrenciesComboBox();
     }
     @Override
     public void mousePressed(MouseEvent e) {

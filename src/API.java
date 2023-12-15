@@ -9,8 +9,8 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class API implements Subject {
-    private String API_KEY = "c419a2f16c0967ee3eaa58f1";
-    private final String API_URL = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/pair/";
+    private String apiKey = "c419a2f16c0967ee3eaa58f1";
+    private final String API_URL = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/";
     private final ArrayList<Observer> listOfObservers = new ArrayList<>();
 
     public void setApiExchangeInput(Enum<Currencies> baseCurrencyEnum, Enum<Currencies> targetCurrencyEnum, double conversionAmount) {
@@ -30,15 +30,15 @@ public class API implements Subject {
             String result = jsonObj.get("result").toString(); //Berättar om det gick att omvandla
 
             if (result.equalsIgnoreCase("\"success\"")) {
-                Object info = new Object(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
+                ExchangeInfo info = new ExchangeInfo(conversionResult, conversionRate, baseCurrencyEnum, targetCurrencyEnum, timeLastUpdateUtc);
                 notifySubscriber(info);
 
             } else if (result.equalsIgnoreCase("quota-reached")) { //om API key är slut
-                if (API_KEY.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {
+                if (apiKey.equalsIgnoreCase("363262aeabe3f69bc894fef0")) {
                     System.out.println("account has reached the the number of requests allowed by your plan");
                     System.exit(0);
                 }
-                API_KEY = "363262aeabe3f69bc894fef0";
+                apiKey = "363262aeabe3f69bc894fef0";
                 setApiExchangeInput(baseCurrencyEnum, targetCurrencyEnum, conversionAmount);
             }
 
