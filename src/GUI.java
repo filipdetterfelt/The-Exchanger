@@ -20,7 +20,7 @@ public class GUI extends JFrame {
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
     JTextField tillValuta = new JTextField(); //Label där de presenteras vilken valuta från (lägg in värde)
     JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 SEK =" +
-            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>" +
+            "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0953 US Dollars</h1>"+
             "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 USD = 10.4893 SEK<br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
     JLabel sourceOfData = new JLabel("<html><p style =' color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" +
             ";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data extracted from</html>"); //Label för att pressentera källan av datan
@@ -152,18 +152,6 @@ public class GUI extends JFrame {
 
     public void updateExchangedAmount(double amount){
         tillValuta.setText(String.valueOf(amount));
-    }
-
-    public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
-      /*  JEditorPane editorPane = new JEditorPane();
-        editorPane.setEditable(false);
-        editorPane.setContentType("text/html");
-        //rateInformation = "HTML kod här"
-        //rateInformation =new JLabel("<html><font color='red' size='4'text</font>");
-        String htmlText = String.format("<html><h1 style ='color: white;'>1 SEK = <br>0.0953 US Dollars</h1>" +
-                "<p style='font-size:12px;'>1 USD ? 10.4893 SEK</p></html>");
-        rateInformation.setText(htmlText);
-        //rateInformation.setText(toCurrency);*/
     }
 
     public void updateExchangedDate(String date){

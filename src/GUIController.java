@@ -31,7 +31,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
             //Timer för delay i API-utskick
     timer = new Timer(1000, e -> {
         if (!originalAmount.equals("0") && isValidInput(gui.frånValuta.getText())) {
-            System.out.println("Sending to API");
+            System.out.println("Sending to API from Timer");
             api.setApiExchangeInput(frånValutaComboBox, tillValutaComboBox, amount);
         }
             });
@@ -74,7 +74,7 @@ public class GUIController implements ActionListener, Observer, MouseListener {
     public void update(Object exchangeinfo) {
         ExchangeInfo info = (ExchangeInfo) exchangeinfo;
         gui.updateExchangedAmount(info.getExchangedAmount());
-        gui.updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
+        updateRateInformation(info.getBaseCurrency(), info.getTargetCurrency(), info.getRate(), info.getReverseRate());
         gui.updateExchangedDate(info.getDate());
     }
     public void updateInputText(GUI gui) {
@@ -88,7 +88,17 @@ public class GUIController implements ActionListener, Observer, MouseListener {
             gui.tillValuta.repaint();
         }
     }
+
+    public void updateRateInformation(Enum<Currencies> fromCurrency,Enum<Currencies> toCurrency, double rate, double reversedRate ){
+        Currencies tempToCurrency = (Currencies) toCurrency;
+        gui.rateInformation.setText("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 " +fromCurrency + " =" +
+                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>" + rate + " " +tempToCurrency.fullName+ "</h1>" +
+                "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + reversedRate + " " + fromCurrency + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br></p></html>");
+    }
     public void swapCurrenciesComboBox() {
+        /*Timer timer2 = new Timer(1000, e -> {
+
+        });*/
         JComboBox<Currencies> comboBox = gui.getFrånValutaComboBox();
         Enum<Currencies> currencyFromFirstComboBox = (Currencies) comboBox.getSelectedItem();
         JComboBox<Currencies> comboBox2 = gui.getTillValutaComboBox();
@@ -98,7 +108,8 @@ public class GUIController implements ActionListener, Observer, MouseListener {
         gui.tillValutaComboBox.setSelectedItem(currencyFromFirstComboBox);
 
         updateInputText(gui);
-        restartTimer();
+        System.out.println("Swapping currencies");
+        timer.restart();
     }
 
     public void restartTimer() {
@@ -114,6 +125,8 @@ public class GUIController implements ActionListener, Observer, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         swapCurrenciesComboBox();
+        gui.revalidate();
+        gui.repaint();
     }
     @Override
     public void mousePressed(MouseEvent e) {
