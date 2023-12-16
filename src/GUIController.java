@@ -100,8 +100,10 @@ public class GUIController implements ActionListener, Observer, MouseListener {
 
 
         gui.rateInformation.setText("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 " + fromCurrency + " =" +
-                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>" + formattedRate + " " + tempToCurrency.fullName + "</h1>" +
-                "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + formattedRateReverse + " " + fromCurrency + "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br></p></html>");
+                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br><span style= 'color: #B4B4B4'>" + formattedRate + " </span>" + tempToCurrency.fullName + "</h1>" +
+                "<p style='font-size:12px; color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 " + toCurrency + " = " + formattedRateReverse + " " + fromCurrency +
+                "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br>" +
+                "</p></html>");
     }
 
     public void updateSourceOfData(String data) {

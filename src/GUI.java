@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 
     JComboBox<Currencies> frånValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för från valuta
     JComboBox<Currencies> tillValutaComboBox = new JComboBox<>((Currencies.values())); // COmbobox för till valuta
-    JLabel xChangerName = new JLabel("<html><p style =' color: white;'><br>The X:changer</html>"); //Rubriken på appen
+    JLabel xChangerName = new JLabel("<html><p style =' color: white;'><br>The <span style=color:#F3A10F>X</span>:changer</html>"); //Rubriken på appen
     JLabel tillLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Till:</p>"); //Label där det står till
     JLabel frånLabel = new JLabel("<html><p style =' font-size: 12px; color: white;'><br><br><br>Från:</p>"); //Label där det står från
     JTextField frånValuta = new JTextField(); //Label där de presenterar vilken valuta till (lägg in värde)
@@ -24,7 +24,7 @@ public class GUI extends JFrame {
     JLabel rateInformation = new JLabel("<html><h1 style ='color: white;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " +
             "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </h1>"+
             "<p style='font-size:15px; color: white;'>             <br><br><br><br></p></html>"); //Label för att presentera nuvarande kurs
-    JLabel sourceOfData = new JLabel();
+    JLabel sourceOfData = new JLabel("<html><p style ='color: #B4B4B4; font-size:8px;'>Data extracted from</html>"); //Label för att presentera källan av datan
     JLabel iconChristmasTree = new JLabel();
     JLabel dateOfExchange = new JLabel();
     JLabel swapButtonLabel = new JLabel();
